@@ -10,7 +10,7 @@ def cookies(driver):
     driver.get("https://www.parcelforce.com")
     time.sleep(5) 
 
-#--------------- (1) Read Postcodes from CSV File ---------------#
+#1. Read Postcodes from CSV File 
 
 def read_postcodes_from_csv(PostcodeSample):
     postcodes = []
@@ -22,16 +22,16 @@ def read_postcodes_from_csv(PostcodeSample):
 
 
 
-#------------------- (2) Define Parcel Sizes -------------------#
+#2. Define Parcel Sizes
 
 parcel_sizes = {
     "small": {"weight": "2", "length": "45", "width": "35", "height": "16"},
     "medium": {"weight": "20", "length": "61", "width": "46", "height": "46"},
     "large": {"weight": "30", "length": "150", "width": "50", "height": "50"}
-                                                                    }
+                                                                  }
 
 
-#---------------------- (3) Retrieve Quote ----------------------#
+#3. Retrieve Quote
 
 def get_quote(driver, collection_postcode, delivery_postcode, weight, length, width, height, parcel_size):
     driver.get("https://www.parcelforce.com")
@@ -63,7 +63,7 @@ def get_quote(driver, collection_postcode, delivery_postcode, weight, length, wi
     
     return extract_quote(driver, parcel_size)
 
-#------------------ (4) Extract Quote to Database ------------------#
+#4) Extract Quote to Database
 
 def extract_quote(driver, parcel_size):
     quotes = {}
@@ -102,7 +102,7 @@ def extract_quote(driver, parcel_size):
     return quotes
 
 
-#------------------ (5) Write Quote to CSV file ------------------#
+#5) Write Quote to CSV file 
 
 def write_quotes_to_csv(quotes_list, output_file):
     with open(output_file, "w", newline="") as csvfile:
@@ -114,7 +114,11 @@ def write_quotes_to_csv(quotes_list, output_file):
             writer.writerow(quote_values)
 
 
-#------------------ (6) Running Web Scraper ------------------#
+####
+####
+## Running Web Scraper 
+####
+####
 
 def main():
     driver = uc.Chrome(headless=False, use_subprocess=False)
